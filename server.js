@@ -14,3 +14,11 @@ const db = mysql.createConnection({
   password: "",
   database: "felveteli",
 });
+
+app.get("/", (req, res) => {
+  res.send("A szerver működik!");
+});
+
+app.listen(3000, () => {
+  console.log("A szerver a 3000 porton fut!");
+});
