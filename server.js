@@ -19,6 +19,17 @@ app.get("/", (req, res) => {
   res.send("A szerver működik!");
 });
 
+app.get("/elozo_rangsor", (req, res) => {
+  const query = `SELECT nev, agazat, SUM(pontszam) AS osszpont 
+                   FROM felveteli 
+                   GROUP BY nev, agazat 
+                   ORDER BY nev ASC`;
+  db.query(query, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.listen(3000, () => {
   console.log("A szerver a 3000 porton fut!");
 });
