@@ -42,7 +42,7 @@ app.get("/agazatok", (req, res) => {
   });
 });
 
-app.get("/felvettek-rangsor", (req, res) => {
+app.get("/felvettek_rangsor", (req, res) => {
   const selectedAgazat = req.query.agazat;
 
   if (!selectedAgazat) {
