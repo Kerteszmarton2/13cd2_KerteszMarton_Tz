@@ -37,6 +37,23 @@ app.get("/agazatok", (req, res) => {
     res.json(results);
   });
 });
+
+app.get("/felvettek_rangsor", (req, res) => {
+  const selectedAgazat = req.query.agazat;
+  if (!selectedAgazat) {
+    return res.status(400).send("Agazat paraméter szükséges");
+  }
+  const query = `SELECT nev, agazat, SUM(pontszam) AS osszpontszam 
+                   FROM felveteli 
+                   WHERE agazat = ? 
+                   GROUP BY nev, agazat 
+                   ORDER BY osszpontszam DESC 
+                   LIMIT 32`;
+  db.query(query, [selectedAgazat], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
 app.listen(3000, () => {
   console.log("A szerver a 3000 porton fut!");
 });
