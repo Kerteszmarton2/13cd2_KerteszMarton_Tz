@@ -30,6 +30,13 @@ app.get("/elozo_rangsor", (req, res) => {
   });
 });
 
+app.get("/agazatok", (req, res) => {
+  const query = "SELECT DISTINCT agazat FROM felveteli";
+  db.query(query, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
 app.listen(3000, () => {
   console.log("A szerver a 3000 porton fut!");
 });
